@@ -1,16 +1,15 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import Home from "./components/Home";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
-    <>
-      <Home/>      
-    </>
+    <div className="flex flex-col h-screen">
+      <div className="flex flex-col flex-1">
+        <Outlet />
+      </div>
+    </div>
   );
 }
 export default App;
