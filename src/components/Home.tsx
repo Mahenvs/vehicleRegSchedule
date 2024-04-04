@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="flex justify-center items-center mb-4 flex-col ">
+    <div className="flex justify-center items-center min-h-screen mb-4 flex-col ">
       <h2 className="text-2xl font-bold">
         Welcome to Car Service Appointment booking system !
       </h2>
