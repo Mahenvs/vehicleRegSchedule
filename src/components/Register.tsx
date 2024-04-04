@@ -5,9 +5,10 @@ import Heading from "./Heading";
 import { useNavigate } from "react-router-dom";
 import { RegisterUser } from "../API/Auth";
 import { validateForm } from "../common/validate";
+import { FormValues } from "../common/interfaces";
 
 const Register = () => {
-  const validate = (values) => {
+  const validate = (values:FormValues) => {
     const errors = validateForm(values);
     return errors;
   };
@@ -20,7 +21,7 @@ const Register = () => {
       password: "",
       phoneNo: "",
       vehicleType: "",
-      manufacturedYear: "",
+      manufacturedYear: 2000,
       vehicleNum: "",
     },
     validate,

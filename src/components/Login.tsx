@@ -4,16 +4,11 @@ import { validateLogin } from "../common/validate";
 import { LoginUser } from "../API/Auth";
 import { useNavigate } from "react-router-dom";
 
-interface valueType {
-  userName : string,
-  password : string
-}
-
 const Login = () => {
   
   const navigate = useNavigate();
 
-  const validate = (values : valueType) => {
+  const validate = (values) => {
     const errors = validateLogin(values);
     return errors;
   };
@@ -28,7 +23,7 @@ const Login = () => {
       navigate("appointment-logs");
       console.log(data);
       
-      localStorage.setItem("userData",data)
+      localStorage.setItem("userData",JSON.stringify(data))
     },
   });
   return (
@@ -54,7 +49,7 @@ const Login = () => {
               />
             </div>
             {formik.errors.userName ? (
-              <div className="flex justify-end text-red-600">
+              <div className="flex justify-end text-[#AF3C3D]">
                 {formik.errors.userName}
               </div>
             ) : null}
@@ -76,7 +71,7 @@ const Login = () => {
               />
             </div>
             {formik.errors.password ? (
-              <div className="flex justify-end text-red-600">
+              <div className="flex justify-end text-[#AF3C3D]">
                 {formik.errors.password}
               </div>
             ) : null}

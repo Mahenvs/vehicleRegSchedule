@@ -1,7 +1,11 @@
 export interface tableProps {
     title: string;
 }
-
+export interface loginForm{
+    userName: string;
+    password: string;
+    
+}
 export interface FormValues {
     name: string;
     userName: string;
@@ -10,7 +14,7 @@ export interface FormValues {
     phoneNo: string;
     vehicleType: "car" | "bike";
     manufacturedYear: number;
-    vehicleNum: number;
+    vehicleNum: string;
 }
 
 export interface FormFieldProps {

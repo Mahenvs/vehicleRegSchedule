@@ -43,7 +43,7 @@ const BookAppointment = () => {
               />
             </div>
             {formik.errors.name ? (
-              <div className="flex justify-end text-red-600">
+              <div className="flex justify-end text-[#AF3C3D]">
                 {formik.errors.name}
               </div>
             ) : null}

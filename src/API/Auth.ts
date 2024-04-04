@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FormValues, valueType } from "../common/interfaces";
+import { FormValues } from "../common/interfaces";
 
 export const RegisterUser = async (body: FormValues) => {
   try {
@@ -23,7 +23,7 @@ export const RegisterUser = async (body: FormValues) => {
   }
 }
 
-export const LoginUser = async (body: valueType) => {
+export const LoginUser = async (body: FormValues) => {
   try {
     const url = "http://localhost:8080/user/login";
     const response = await axios.post(url, {
