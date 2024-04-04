@@ -8,6 +8,7 @@ import Register from "./components/Register.tsx";
 import Home from "./components/Home.tsx";
 import Login from "./components/Login.tsx";
 import BookAppointment from "./components/BookAppointment.tsx";
+import AppointmentLogs from "./components/AppointmentLogs.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path:"book-appointment",
         element: <BookAppointment/>
+      },
+      {
+        path:"appointment-logs",
+        element: <AppointmentLogs/>
       }
     ],
   },

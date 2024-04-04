@@ -1,5 +1,6 @@
 import { FormikErrors, useFormik } from "formik";
 import { registrationForm } from "./registrationModel";
+import Heading from "./Heading";
 
 interface FormValues {
   userName: string;
@@ -38,7 +39,7 @@ const Login = () => {
   });
   return (
     <>
-      <h3 className="flex justify-center text-3xl underline">Login</h3>
+      <Heading>Login</Heading>
       <form
         onSubmit={formik.handleSubmit}
         className=" mx-auto flex flex-col rounded justify-center  border-zinc-400 border mt-5 p-3 "
@@ -81,7 +82,7 @@ const Login = () => {
               />
             </div>
             {formik.errors.password ? (
-              <div className="flex  justify-end r ight-0 text-red-600">
+              <div className="flex justify-end text-red-600">
                 {formik.errors.password}
               </div>
             ) : null}
@@ -91,7 +92,7 @@ const Login = () => {
         <div className="fle x justify-en d mt-2 justify-end flex mr-12">
           <button
             type="submit"
-            className="px-2 py-1 right-0 text-center bg-blue-500  rounded text-white focus:outline-none"
+            className="px-2 py-1 right-0 text-center bg-indigo-600  rounded text-white focus:outline-none"
           >
             Login
           </button>

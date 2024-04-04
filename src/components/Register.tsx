@@ -1,6 +1,7 @@
 import { FormikErrors, useFormik } from "formik";
 import { fieldConfigs } from "./registrationModel";
 import FormField from "./FormField";
+import Heading from "./Heading";
 
 interface FormValues {
   name: string;
@@ -63,7 +64,7 @@ const Register = () => {
   });
   return (
     <>
-      <h3 className="flex justify-center text-3xl underline">Registration</h3>
+      <Heading >Registration</Heading>
       <form
         onSubmit={formik.handleSubmit}
         className="mx-auto flex flex-col w- 1/2 justify-center  border-zinc- 100 border mt-10 p-3"
@@ -87,7 +88,7 @@ const Register = () => {
         <div className="mt-2 justify-end flex mr-12">
           <button
             type="submit"
-            className="px-2 py-1 right-0 text-center bg-blue-500  rounded text-white focus:outline-none"
+            className="px-2 py-1 right-0 text-center bg-indigo-600  rounded text-white focus:outline-none"
           >
             Register
           </button>

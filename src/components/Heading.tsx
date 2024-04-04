@@ -1,9 +1,12 @@
-import React from 'react'
-
-const Heading = ({children}) => {
-  return (
-    <div>{children}</div>
-  )
+interface HeadingProps {
+  className?: string; // CSS class for styling, optional
+  children: React.ReactNode; // Content of the heading
 }
 
-export default Heading
+const Heading: React.FC<HeadingProps> = ({ className, children }) => {
+  return (
+    <div className={`text-3xl font-semibold ${className}`}>{children}</div>
+  );
+};
+
+export default Heading;
