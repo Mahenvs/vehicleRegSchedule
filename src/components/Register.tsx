@@ -2,6 +2,7 @@ import { FormikErrors, useFormik } from "formik";
 import { fieldConfigs } from "./registrationModel";
 import FormField from "./FormField";
 import Heading from "./Heading";
+import axios from "axios";
 
 interface FormValues {
   name: string;
@@ -57,14 +58,30 @@ const Register = () => {
       vehicleNum: "",
     },
     validate,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values, " values ");
+      const url= "http://localhost:8080/register"
+      const response = await axios.post(url, {
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        username: values.userName,
+        vehicle: {
+          vehicleType: values.vehicleType,
+          vehicleNum: values.vehicleNum,
+          manufacturedYear: values.manufacturedYear,
+        },
+        role: "user",
+      });
+      const result = await response;
+      console.log(result);
+      
       alert(JSON.stringify(values, null, 2));
     },
   });
   return (
     <>
-      <Heading >Registration</Heading>
+      <Heading>Registration</Heading>
       <form
         onSubmit={formik.handleSubmit}
         className="mx-auto flex flex-col w- 1/2 justify-center  border-zinc- 100 border mt-10 p-3"
