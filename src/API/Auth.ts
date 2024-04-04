@@ -28,8 +28,7 @@ export const LoginUser = async (body: FormValues) => {
     const url = "http://localhost:8080/user/login";
     const response = await axios.post(url, {
       username: body.userName,
-      password: body.password,
-      role: "user",
+      password: body.password
     });
     return response.data;
   } catch (error) {
