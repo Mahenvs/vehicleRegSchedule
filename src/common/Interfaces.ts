@@ -25,3 +25,8 @@ export interface FormFieldProps {
     maxLen?: number;
     placeholder: string
 }
+
+export interface valueType {
+    userName : string,
+    password : string
+  }

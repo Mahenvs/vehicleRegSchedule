@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom'
 const NavBar = () => {
   return (
     <div className='bg-red-400 border-b h-16 flex justify-between px-3 items-center mb-4'>
+        <Link to={"/"} >
         <Heading className='text-white'>Car Service</Heading>
+        </Link>
         <div className='flex gap-6 mx-4'>
         <Link to={"appointment-logs"} className='text-[#171b1e] font-semibold'>
             Appointment Logs

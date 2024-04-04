@@ -4,11 +4,16 @@ import { validateLogin } from "../common/validate";
 import { LoginUser } from "../API/Auth";
 import { useNavigate } from "react-router-dom";
 
+interface valueType {
+  userName : string,
+  password : string
+}
+
 const Login = () => {
   
   const navigate = useNavigate();
 
-  const validate = (values) => {
+  const validate = (values : valueType) => {
     const errors = validateLogin(values);
     return errors;
   };
@@ -18,7 +23,7 @@ const Login = () => {
       password: "",
     },
     validate,
-    onSubmit: async (values) => {
+    onSubmit: async (values ) => {
       const data = await LoginUser(values);
       navigate("appointment-logs");
       console.log(data);
