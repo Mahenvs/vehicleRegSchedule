@@ -35,8 +35,7 @@ export const validateForm = (values) => {
 
   export const validateLogin = (values) => {
     const errors: FormikErrors<FormValues> = {};
-    console.log("inside ");
-
+    
     if (!values.userName) {
       errors.userName = "Required";
     } else if (values.userName.length > 10) {
@@ -48,7 +47,6 @@ export const validateForm = (values) => {
     } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(values.password)) {
       errors.password = "Invalid password";
     }
-    console.log(errors, " are ");
 
     return errors;
   };

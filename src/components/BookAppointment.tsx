@@ -10,8 +10,7 @@ const BookAppointment = () => {
 
   const date = new Date();
   date.setDate(date.getDate() + 1);
-  console.log(date);
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0).toISOString().split("T")[0] + "T12:00:00";
 
   const [userDetails, setUserData] = useState({
     username: "",
@@ -23,8 +22,6 @@ const BookAppointment = () => {
 
     if (loggedIn) {
       const data = JSON.parse(userData);
-
-      console.log(data);
 
       setUserData((prevState) => ({
         ...prevState,
@@ -42,12 +39,10 @@ const BookAppointment = () => {
     },
 
     onSubmit: async (values) => {
-      // scheduleAppointment
-      console.log({...values,username:userDetails.username});
-
-      const data = await scheduleAppointment(values);
+    
+      const data = await scheduleAppointment({...values,username:userDetails.username});
       navigate("appointment-logs");
-      // console.log(data);
+    
     },
   });
 

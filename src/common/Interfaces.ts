@@ -1,5 +1,15 @@
 export interface tableProps {
     title: string;
+    appointments: appointmentProps[]
+}
+
+export interface appointmentProps {
+    "id": number,
+    "userId": number,
+    "vehicleType": string,
+    "scheduledDate": string,
+    "status": string
+
 }
 export interface loginForm{
     userName: string;

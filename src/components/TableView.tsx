@@ -2,12 +2,23 @@ import { useState } from "react";
 import Dialog from "./Dialog";
 import { tableProps } from "../common/interfaces";
 
-const Table = (props: tableProps) => {
-  const appointments = [
-    { sno: 1, date: "2024-04-08", vehicleNo: "ABC123" },
-    { sno: 2, date: "2024-04-09", vehicleNo: "XYZ456" },
-    
-  ];
+const Table = (props: tableProps ) => {
+//   const appointments = [
+//     {
+//         "id": 1,
+//         "userId": 1,
+//         "vehicleType": "Bike",
+//         "scheduledDate": "2024-05-10T12:00:00",
+//         "status": "BOOKED"
+//     },
+//     {
+//         "id": 2,
+//         "userId": 1,
+//         "vehicleType": "Car",
+//         "scheduledDate": "2024-04-10T12:00:00",
+//         "status": "BOOKED"
+// }
+// ]
 
   const [dialog, setDialog] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -61,7 +72,13 @@ const Table = (props: tableProps) => {
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
-              Vehicle No
+              Vehicle Type
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Status
             </th>
             <th
               scope="col"
@@ -72,14 +89,17 @@ const Table = (props: tableProps) => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {appointments.map((appointment, index) => (
+          {props.appointments.map((appointment, index) => (
             <tr key={index}>
-              <td className="px-6 py-4 whitespace-nowrap">{appointment.sno}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{appointment.id}</td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {appointment.date}
+                {appointment.scheduledDate}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {appointment.vehicleNo}
+                {appointment.vehicleType}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {appointment.status}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
