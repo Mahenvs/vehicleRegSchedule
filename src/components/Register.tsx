@@ -3,8 +3,8 @@ import { fieldConfigs } from "./registrationModel";
 import FormField from "./FormField";
 import Heading from "./Heading";
 import { useNavigate } from "react-router-dom";
-import { RegisterUser } from "../API/Register";
-import { FormValues } from "../common/formValues";
+import { FormValues } from "../common/interfaces";
+import { RegisterUser } from "../API/Auth";
 
 const Register = () => {
   const validate = (values) => {

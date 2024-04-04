@@ -1,11 +1,8 @@
 import { useState } from "react";
 import Dialog from "./Dialog";
+import { tableProps } from "../common/interfaces";
 
-
-interface props {
-  title: string;
-}
-const Table = (props: props) => {
+const Table = (props: tableProps) => {
   const appointments = [
     { sno: 1, date: "2024-04-08", vehicleNo: "ABC123" },
     { sno: 2, date: "2024-04-09", vehicleNo: "XYZ456" },

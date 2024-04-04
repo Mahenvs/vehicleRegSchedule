@@ -1,17 +1,5 @@
 import React from "react";
-
-interface FormFieldProps {
-  label: string;
-  id: string;
-  name: string;
-  type: string;
-  value: string | number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
-  error?: string;
-  maxLen?: number;
-  placeholder:string
-}
+import { FormFieldProps } from "../common/interfaces";
 
 const FormField: React.FC<FormFieldProps> = ({
   label,
