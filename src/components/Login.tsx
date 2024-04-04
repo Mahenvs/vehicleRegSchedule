@@ -1,5 +1,4 @@
 import { FormikErrors, useFormik } from "formik";
-import { registrationForm } from "./registrationModel";
 import Heading from "./Heading";
 
 interface FormValues {

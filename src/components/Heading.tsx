@@ -1,6 +1,6 @@
 interface HeadingProps {
-  className?: string; // CSS class for styling, optional
-  children: React.ReactNode; // Content of the heading
+  className?: string; 
+  children: React.ReactNode; 
 }
 
 const Heading: React.FC<HeadingProps> = ({ className, children }) => {
