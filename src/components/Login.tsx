@@ -3,12 +3,14 @@ import Heading from "./Heading";
 import { validateLogin } from "../common/validate";
 import { LoginUser } from "../API/Auth";
 import { useNavigate } from "react-router-dom";
+import {valueType} from "../common/interfaces"
+
 
 const Login = () => {
   
   const navigate = useNavigate();
 
-  const validate = (values) => {
+  const validate = (values : valueType) => {
     const errors = validateLogin(values);
     return errors;
   };
