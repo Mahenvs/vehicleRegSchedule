@@ -1,40 +1,14 @@
-import { FormikErrors, useFormik } from "formik";
-import { fieldConfigs } from "./registrationModel";
+import { useFormik } from "formik";
+import { fieldConfigs } from "../common/registrationModel";
 import FormField from "./FormField";
 import Heading from "./Heading";
 import { useNavigate } from "react-router-dom";
-import { FormValues } from "../common/interfaces";
 import { RegisterUser } from "../API/Auth";
+import { validateForm } from "../common/validate";
 
 const Register = () => {
   const validate = (values) => {
-    const errors: FormikErrors<FormValues> = {};
-    if (!values.name) {
-      errors.name = "Required";
-    } else if (values.name.length > 15) {
-      errors.name = "Must be 15 characters or less";
-    } else if (!values.email) {
-      errors.email = "Required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-      errors.email = "Provide valid email";
-    } else if (!values.password) {
-      errors.password = "Required";
-    } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(values.password)) {
-      errors.password = "Invalid password";
-    } else if (!values.phoneNo) {
-      errors.phoneNo = "Required";
-    } else if (!/^\d{0,10}$/.test(values.phoneNo)) {
-      errors.phoneNo = "Invalid Mobile Number";
-    } else if (!values.vehicleType) {
-      errors.vehicleType = "Required";
-    } else if (values.vehicleType != ("Car" || "Bike")) {
-      errors.vehicleType = "Enter Car or Bike";
-    } else if (!values.manufacturedYear) {
-      errors.manufacturedYear = "Required";
-    } else if (!/^\d{0,10}$/.test(values.manufacturedYear)) {
-      errors.manufacturedYear = "Only Years are allowed";
-    }
-
+    const errors = validateForm(values);
     return errors;
   };
   const navigate = useNavigate();
@@ -51,12 +25,10 @@ const Register = () => {
     },
     validate,
     onSubmit: async (values) => {
-      console.log(values, " values ");
-
       const data = await RegisterUser(values);
       navigate("appointment-logs");
 
-      console.log(data);
+      localStorage.setItem("userData", data);
     },
   });
   return (

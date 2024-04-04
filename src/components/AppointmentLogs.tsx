@@ -3,7 +3,7 @@ import Table1 from "./TableView";
 
 const AppointmentLogs = () => {
   return (
-    <div className="fl ex  f lex-col">
+    <div>
       <Heading>Appointment Logs</Heading>
       <Table1 title={"Current Appointments"}/>
     </div>

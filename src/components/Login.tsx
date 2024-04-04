@@ -1,29 +1,15 @@
-import { FormikErrors, useFormik } from "formik";
+import { useFormik } from "formik";
 import Heading from "./Heading";
-
-interface FormValues {
-  userName: string;
-  password: string;
-}
+import { validateLogin } from "../common/validate";
+import { LoginUser } from "../API/Auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  
+  const navigate = useNavigate();
+
   const validate = (values) => {
-    const errors: FormikErrors<FormValues> = {};
-    console.log("inside ");
-
-    if (!values.userName) {
-      errors.userName = "Required";
-    } else if (values.userName.length > 10) {
-      errors.userName = "Must be 10 characters or less";
-    }
-
-    if (!values.password) {
-      errors.password = "Required";
-    } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(values.password)) {
-      errors.password = "Invalid password";
-    }
-    console.log(errors, " are ");
-
+    const errors = validateLogin(values);
     return errors;
   };
   const formik = useFormik({
@@ -32,8 +18,12 @@ const Login = () => {
       password: "",
     },
     validate,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      const data = await LoginUser(values);
+      navigate("appointment-logs");
+      console.log(data);
+      
+      localStorage.setItem("userData",data)
     },
   });
   return (
