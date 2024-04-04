@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import Heading from "./Heading";
+import { useEffect, useState } from "react";
 
 const BookAppointment = () => {
   const date = new Date();
@@ -7,9 +8,21 @@ const BookAppointment = () => {
   console.log(date);
   const today = new Date().toISOString().split("T")[0];
 
+  const [userIs, setUser] = useState("");
+
+  useEffect(() => {
+    const userData = localStorage.getItem("userData") || "";
+    const loggedIn = JSON.parse(localStorage.getItem("loggedIn")) ;
+    
+    if (loggedIn) {
+      const data = JSON.parse(userData);
+      setUser(data.username);
+     
+    }
+  }, []);
   const formik = useFormik({
     initialValues: {
-      picked: "",
+      picked: userIs,
       name: "",
       date: today,
     },
@@ -25,9 +38,9 @@ const BookAppointment = () => {
 
       <form
         onSubmit={formik.handleSubmit}
-        className=" mx-auto flex flex-col rounded justify-center  border-zinc-400 border mt-5 p-3 "
+        className=" mx-auto flex flex-col rounded justify-center  border-zinc-400 border mt-5 p-3 align-middle "
       >
-        <div className="flex flex-row px-12 py-2 gap-2 justify-center">
+        <div className="flex flex-row px-12 py-2 gap-2 justify-center items-center">
           <div className="w-1/2">
             <label htmlFor="name">Name</label>
           </div>
@@ -38,8 +51,9 @@ const BookAppointment = () => {
                 name="name"
                 type="text"
                 onChange={formik.handleChange}
-                value={formik.values.name}
-                className="border border-gray-300 rounded px-2 py-1 hover:outline-none focus:outline-none focus:border-blue-300"
+                value={userIs}
+                readOnly
+                className="border border-gray-300 rounded px-2 py-1 hover:outline-none focus:outline-none bg-gray-200"
               />
             </div>
             {formik.errors.name ? (

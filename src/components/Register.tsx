@@ -28,8 +28,8 @@ const Register = () => {
     onSubmit: async (values) => {
       const data = await RegisterUser(values);
       navigate("appointment-logs");
-
-      localStorage.setItem("userData", data);
+      localStorage.setItem("loggedIn",JSON.stringify(true));
+      localStorage.setItem("userData",JSON.stringify(data))
     },
   });
   return (

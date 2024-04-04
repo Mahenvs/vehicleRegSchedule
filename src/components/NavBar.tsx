@@ -27,6 +27,7 @@ const NavBar = () => {
         {navList.map((item) => (
           <Link
             to={item.link}
+            key={item.text}
             className="text-[#ffffff] font-semibold hover:underline"
           >
             {item.text}

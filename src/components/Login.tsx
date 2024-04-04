@@ -23,7 +23,7 @@ const Login = () => {
       const data = await LoginUser(values);
       navigate("appointment-logs");
       console.log(data);
-      
+      localStorage.setItem("loggedIn",JSON.stringify(true));
       localStorage.setItem("userData",JSON.stringify(data))
     },
   });
