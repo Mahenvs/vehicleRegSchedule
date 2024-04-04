@@ -30,6 +30,12 @@ export interface FormFieldProps {
     placeholder: string
 }
 
+export interface scheduleType{
+    username: string,
+    vehicleType:string,
+    scheduledDate: string,
+    status: string
+}
 export interface valueType {
     userName : string,
     password : string

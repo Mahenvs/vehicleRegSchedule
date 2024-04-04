@@ -2,33 +2,52 @@ import { useFormik } from "formik";
 import Heading from "./Heading";
 import { useEffect, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+import { scheduleAppointment } from "../API/Appointment";
+
 const BookAppointment = () => {
+  const navigate = useNavigate();
+
   const date = new Date();
   date.setDate(date.getDate() + 1);
   console.log(date);
   const today = new Date().toISOString().split("T")[0];
 
-  const [userIs, setUser] = useState("");
+  const [userDetails, setUserData] = useState({
+    username: "",
+  });
 
   useEffect(() => {
     const userData = localStorage.getItem("userData") || "";
-    const loggedIn = JSON.parse(localStorage.getItem("loggedIn")) ;
-    
+    const loggedIn = JSON.parse(localStorage.getItem("loggedIn"));
+
     if (loggedIn) {
       const data = JSON.parse(userData);
-      setUser(data.username);
-     
+
+      console.log(data);
+
+      setUserData((prevState) => ({
+        ...prevState,
+        username: data.username,
+        vehicleType: data.vehicle.vehicleType,
+      }));
     }
   }, []);
   const formik = useFormik({
     initialValues: {
-      picked: userIs,
-      name: "",
-      date: today,
+      vehicleType: "Car",
+      username: userDetails.username,
+      scheduledDate: today,
+      status: "Booked",
     },
 
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      // scheduleAppointment
+      console.log({...values,username:userDetails.username});
+
+      const data = await scheduleAppointment(values);
+      navigate("appointment-logs");
+      // console.log(data);
     },
   });
 
@@ -42,25 +61,20 @@ const BookAppointment = () => {
       >
         <div className="flex flex-row px-12 py-2 gap-2 justify-center items-center">
           <div className="w-1/2">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="username">Name</label>
           </div>
           <div className="flex flex-col">
             <div>
               <input
-                id="name"
-                name="name"
+                id="username"
+                name="username"
                 type="text"
                 onChange={formik.handleChange}
-                value={userIs}
+                value={userDetails.username}
                 readOnly
                 className="border border-gray-300 rounded px-2 py-1 hover:outline-none focus:outline-none bg-gray-200"
               />
             </div>
-            {formik.errors.name ? (
-              <div className="flex justify-end text-[#AF3C3D]">
-                {formik.errors.name}
-              </div>
-            ) : null}
           </div>
         </div>
         <div className="flex flex-row px-12 py-2 gap-2 justify-center">
@@ -75,30 +89,30 @@ const BookAppointment = () => {
             className="flex flex-col"
           >
             <label>
-              <input type="radio" name="picked" value="Two" />
-              Two Wheeler
+              <input type="radio" name="vehicleType" value="Car" />
+              Car
             </label>
             <label>
-              <input type="radio" name="picked" value="Four" />
-              Four Wheeler
+              <input type="radio" name="vehicleType" value="Bike" />
+              Bike
             </label>
           </div>
         </div>
 
         <div className="flex flex-row px-12 py-2 gap-2 justify-center">
           <div className="w-1/2">
-            <label htmlFor="date">Date</label>
+            <label htmlFor="scheduledDate">Date</label>
           </div>
           <div className="flex flex-col">
             <div>
               <input
-                id="date"
-                name="date"
+                id="scheduledDate"
+                name="scheduledDate"
                 type="date"
                 // defaultValue={today}
                 // onChange={(e) => console.log(e.target.value)}
                 onChange={formik.handleChange}
-                value={formik.values.date}
+                value={formik.values.scheduledDate}
                 className="border border-gray-300 rounded px-2 py-1 hover:outline-none focus:outline-none focus:border-blue-300"
               />
             </div>
