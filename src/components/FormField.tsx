@@ -34,7 +34,7 @@ const FormField: React.FC<FormFieldProps> = ({
             className="border border-gray-300 rounded px-2 py-1"
           />
         </div>
-        {error && <div className="flex justify-end text-red-600">{error}</div>}
+        {error && <div className="flex justify-end text-[#AF3C3D">{error}</div>}
       </div>
     </div>
   );

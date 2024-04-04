@@ -90,7 +90,7 @@ const Table = (props: tableProps) => {
                 </button>
                 <button
                   onClick={() => handleCancel(appointment)}
-                  className="ml-2 text-red-600 hover:text-red-900"
+                  className="ml-2 text-[#AF3C3D] hover:text-red-900"
                 >
                   Cancel
                 </button>

@@ -14,7 +14,7 @@ export interface FormValues {
     phoneNo: string;
     vehicleType: "car" | "bike";
     manufacturedYear: number;
-    vehicleNum: number;
+    vehicleNum: string;
 }
 
 export interface FormFieldProps {

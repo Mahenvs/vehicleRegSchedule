@@ -50,7 +50,7 @@ const Login = () => {
               />
             </div>
             {formik.errors.userName ? (
-              <div className="flex justify-end text-red-600">
+              <div className="flex justify-end text-[#AF3C3D]">
                 {formik.errors.userName}
               </div>
             ) : null}
@@ -72,7 +72,7 @@ const Login = () => {
               />
             </div>
             {formik.errors.password ? (
-              <div className="flex justify-end text-red-600">
+              <div className="flex justify-end text-[#AF3C3D]">
                 {formik.errors.password}
               </div>
             ) : null}
