@@ -9,7 +9,8 @@ const Home = () => {
       </h2>
       <h3 className="text-xl">
         Please
-        <Link to="register" className="underline">{" Login/Register "}</Link>
+        <Link to="login" className="underline">{" Login "}</Link> | 
+        <Link to="register" className="underline">{" Register "}</Link>
         to book your appointment
       </h3>
     </div>

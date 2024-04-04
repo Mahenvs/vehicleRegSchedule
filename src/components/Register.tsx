@@ -1,4 +1,6 @@
 import { FormikErrors, useFormik } from "formik";
+import { fieldConfigs } from "./registrationModel";
+import FormField from "./FormField";
 
 interface FormValues {
   name: string;
@@ -12,14 +14,34 @@ interface FormValues {
 }
 
 const Register = () => {
-
   const validate = (values) => {
     const errors: FormikErrors<FormValues> = {};
     if (!values.name) {
       errors.name = "Required";
     } else if (values.name.length > 15) {
       errors.name = "Must be 15 characters or less";
+    } else if (!values.email) {
+      errors.email = "Required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+      errors.email = "Provide valid email";
+    } else if (!values.password) {
+      errors.password = "Required";
+    } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(values.password)) {
+      errors.password = "Invalid password";
+    } else if (!values.phoneNo) {
+      errors.phoneNo = "Required";
+    } else if (!/^\d{0,10}$/.test(values.phoneNo)) {
+      errors.phoneNo = "Invalid Mobile Number";
+    } else if (!values.vehicleType) {
+      errors.vehicleType = "Required";
+    } else if (values.vehicleType != ("Car" || "Bike")) {
+      errors.vehicleType = "Enter Car or Bike";
+    } else if (!values.manufacturedYear) {
+      errors.manufacturedYear = "Required";
+    } else if (!/^\d{0,10}$/.test(values.manufacturedYear)) {
+      errors.manufacturedYear = "Only Years are allowed";
     }
+
     return errors;
   };
   const formik = useFormik({
@@ -40,195 +62,38 @@ const Register = () => {
     },
   });
   return (
-    <div className="   justify-center">
+    <>
       <h3 className="flex justify-center text-3xl underline">Registration</h3>
       <form
         onSubmit={formik.handleSubmit}
-        className="mx-auto flex flex-col w-1/2 justify-center  border-zinc- 100 border mt-10 p-3"
+        className="mx-auto flex flex-col w- 1/2 justify-center  border-zinc- 100 border mt-10 p-3"
       >
-        <div className="flex flex-row px-12 py-2 gap-2 justify-center">
-          <label htmlFor="name" className="flex justify-end">
-            Name
-          </label>
-          <div className="flex flex-col">
-            <div>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.name}
-                className="border border-gray-300 rounded px-2 py-1"
-              />
-            </div>
-            {/* {formik.errors.name ? (
-              <div className="flex flex-col">{formik.errors.name}</div>
-            ) : null} */}
-          </div>
-        </div>
-        <div className="flex flex-row px-12 gap-2 py-2 justify-center">
-          <label htmlFor="userName" className="flex justify-end">
-            User Name
-          </label>
-          <div className="flex flex-col">
-            <div>
-              <input
-                id="userName"
-                name="userName"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.userName}
-                className="border border-gray-300 rounded px-2 py-1"
-              />
-            </div>
-            {/* {formik.errors.userName ? (
-              <div className="flex ">{formik.errors.userName}</div>
-            ) : null} */}
-          </div>
-        </div>
+        {fieldConfigs.map((field) => (
+          <FormField
+            key={field.id}
+            label={field.label}
+            id={field.id}
+            name={field.name}
+            type={field.type}
+            value={formik.values[field.name]}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            maxLen={field.maxLen}
+            error={formik.errors[field.name]}
+            placeholder={field.placeholder}
+          />
+        ))}
 
-        <div className="flex flex-row px-12 py-2 gap-2 justify-center">
-          <label htmlFor="email" className="flex justify-end ">
-            Email Address
-          </label>
-          <div className="flex flex-col">
-            <div>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-                className="border border-gray-300 rounded px-2 py-1"
-              />
-            </div>
-            {/* {formik.errors.email ? <div>{formik.errors.email}</div> : null} */}
-          </div>
+        <div className="mt-2 justify-end flex mr-12">
+          <button
+            type="submit"
+            className="px-2 py-1 right-0 text-center bg-blue-500  rounded text-white focus:outline-none"
+          >
+            Register
+          </button>
         </div>
-
-        <div className="flex flex-row px-12 py-2 gap-2 justify-center">
-          <label htmlFor="password" className="flex justify-end">
-            Password
-          </label>
-          <div className="flex flex-col">
-            <div>
-              <input
-                id="password"
-                name="password"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-                className="border border-gray-300 rounded px-2 py-1"
-              />
-            </div>
-            {/* {formik.errors.password ? (
-              <div className="flex flex-col">{formik.errors.password}</div>
-            ) : null} */}
-          </div>
-        </div>
-        <div className="flex flex-row px-12 gap-2 py-2 justify-center">
-          <label htmlFor="phoneNo" className="flex justify-end">
-            Phone No
-          </label>
-          <div className="flex flex-col">
-            <div>
-              <input
-                id="phoneNo"
-                name="phoneNo"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.phoneNo}
-                className="border border-gray-300 rounded px-2 py-1"
-              />
-            </div>
-            {/* {formik.errors.phoneNo ? (
-              <div className="flex ">{formik.errors.phoneNo}</div>
-            ) : null} */}
-          </div>
-        </div>
-
-        <div className="flex flex-row px-12 py-2 gap-2 justify-center">
-          <label htmlFor="vehicleType" className="flex justify-end">
-            Vehicle Type
-          </label>
-          <div className="flex flex-col">
-            <div>
-              <input
-                id="vehicleType"
-                name="vehicleType"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.vehicleType}
-                className="border border-gray-300 rounded px-2 py-1"
-              />
-            </div>
-            {/* {formik.errors.vehicleType ? (
-              <div className="flex flex-col">{formik.errors.vehicleType}</div>
-            ) : null} */}
-          </div>
-        </div>
-        <div className="flex flex-row px-12 gap-2 py-2 justify-center">
-          <label htmlFor="vehNum" className="flex justify-end">
-            Vehicle Number
-          </label>
-          <div className="flex flex-col">
-            <div>
-              <input
-                id="vehNum"
-                name="vehicleNum"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.vehicleNum}
-                className="border border-gray-300 rounded px-2 py-1"
-              />
-            </div>
-            {formik.errors.vehicleNum ? (
-              <div className="flex ">{formik.errors.vehicleNum}</div>
-            ) : null}
-          </div>
-        </div>
-
-        <div className="flex flex-row px-12 py-2 gap-2 justify-center">
-          <label htmlFor="year" className="flex justify-end">
-            Manufactured Year
-          </label>
-          <div className="flex flex-col">
-            <div>
-              <input
-                id="year"
-                name="manufacturedYear"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.manufacturedYear}
-                className="border border-gray-300 rounded px-2 py-1"
-              />
-            </div>
-            {formik.errors.manufacturedYear ? (
-              <div className="flex flex-col">
-                {formik.errors.manufacturedYear}
-              </div>
-            ) : null}
-          </div>
-        </div>
-
-        {/* <div> */}
-        <button
-          type="submit"
-          className="mt-2 px-2 py-1 text-white bg-blue-500 text-whit rounded "
-        >
-          Submit
-        </button>
-        {/* </div> */}
       </form>
-    </div>
+    </>
   );
 };
 export default Register;

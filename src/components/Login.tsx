@@ -1,4 +1,5 @@
 import { FormikErrors, useFormik } from "formik";
+import { registrationForm } from "./registrationModel";
 
 interface FormValues {
   userName: string;
@@ -15,7 +16,7 @@ const Login = () => {
     } else if (values.userName.length > 10) {
       errors.userName = "Must be 10 characters or less";
     }
-    
+
     if (!values.password) {
       errors.password = "Required";
     } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(values.password)) {
@@ -33,7 +34,6 @@ const Login = () => {
     validate,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      
     },
   });
   return (
@@ -45,7 +45,7 @@ const Login = () => {
       >
         <div className="flex flex-row px-12 py-2 gap-2 justify-center">
           <div className="w-1/2">
-          <label htmlFor="userName">User Name</label>
+            <label htmlFor="userName">User Name</label>
           </div>
           <div className="flex flex-col">
             <div>
@@ -59,13 +59,15 @@ const Login = () => {
               />
             </div>
             {formik.errors.userName ? (
-              <div className="flex justify-end text-red-600">{formik.errors.userName}</div>
+              <div className="flex justify-end text-red-600">
+                {formik.errors.userName}
+              </div>
             ) : null}
           </div>
         </div>
         <div className="flex flex-row px-12 py-2 gap-2 justify-center">
-        <div className="w-1/2">
-          <label htmlFor="password">Password</label>
+          <div className="w-1/2">
+            <label htmlFor="password">Password</label>
           </div>
           <div className="flex flex-col">
             <div>
@@ -89,9 +91,9 @@ const Login = () => {
         <div className="fle x justify-en d mt-2 justify-end flex mr-12">
           <button
             type="submit"
-            className="px-2 py-1 right-0 text-center bg-blue-500  rounded text-white"
+            className="px-2 py-1 right-0 text-center bg-blue-500  rounded text-white focus:outline-none"
           >
-            Submit
+            Login
           </button>
         </div>
       </form>
