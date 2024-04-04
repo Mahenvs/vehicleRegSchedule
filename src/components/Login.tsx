@@ -3,12 +3,13 @@ import Heading from "./Heading";
 import { validateLogin } from "../common/validate";
 import { LoginUser } from "../API/Auth";
 import { useNavigate } from "react-router-dom";
+import { loginForm } from "../common/interfaces";
 
 const Login = () => {
   
   const navigate = useNavigate();
 
-  const validate = (values) => {
+  const validate = (values:loginForm) => {
     const errors = validateLogin(values);
     return errors;
   };
@@ -23,7 +24,7 @@ const Login = () => {
       navigate("appointment-logs");
       console.log(data);
       
-      localStorage.setItem("userData",data)
+      localStorage.setItem("userData",JSON.stringify(data))
     },
   });
   return (
