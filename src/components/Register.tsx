@@ -2,18 +2,9 @@ import { FormikErrors, useFormik } from "formik";
 import { fieldConfigs } from "./registrationModel";
 import FormField from "./FormField";
 import Heading from "./Heading";
-import axios from "axios";
-
-interface FormValues {
-  name: string;
-  userName: string;
-  password: string;
-  email: string;
-  phoneNo: number;
-  vehicleType: "car" | "bike";
-  manufacturedYear: number;
-  vehicleNum: number;
-}
+import { useNavigate } from "react-router-dom";
+import { RegisterUser } from "../API/Register";
+import { FormValues } from "../common/formValues";
 
 const Register = () => {
   const validate = (values) => {
@@ -46,6 +37,7 @@ const Register = () => {
 
     return errors;
   };
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -60,23 +52,11 @@ const Register = () => {
     validate,
     onSubmit: async (values) => {
       console.log(values, " values ");
-      const url= "http://localhost:8080/register"
-      const response = await axios.post(url, {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-        username: values.userName,
-        vehicle: {
-          vehicleType: values.vehicleType,
-          vehicleNum: values.vehicleNum,
-          manufacturedYear: values.manufacturedYear,
-        },
-        role: "user",
-      });
-      const result = await response;
-      console.log(result);
-      
-      alert(JSON.stringify(values, null, 2));
+
+      const data = await RegisterUser(values);
+      navigate("appointment-logs");
+
+      console.log(data);
     },
   });
   return (
